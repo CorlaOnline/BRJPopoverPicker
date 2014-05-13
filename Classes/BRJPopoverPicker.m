@@ -26,7 +26,7 @@
 
 static NSString * const BRJPopoverPickerCellReuseIdentifier = @"BRJPopoverPickerCellReuseIdentifier";
 
-@interface BRJPopoverPicker () <UITableViewDataSource, UITableViewDelegate>
+@interface BRJPopoverPicker () <UITableViewDataSource, UITableViewDelegate, UIPopoverControllerDelegate>
 @property (strong, nonatomic) UIPopoverController *popoverController;
 @property (strong, nonatomic) UITableViewController *tableViewController;
 @property (assign, nonatomic) NSUInteger selectedIndex;
@@ -52,6 +52,7 @@ static NSString * const BRJPopoverPickerCellReuseIdentifier = @"BRJPopoverPicker
             
             UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:navigationController];
             popoverController.backgroundColor = [UIColor whiteColor];
+            popoverController.delegate = self;
             
             popoverController;
         });
@@ -190,6 +191,13 @@ static NSString * const BRJPopoverPickerCellReuseIdentifier = @"BRJPopoverPicker
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     return [self canSelectRowAtIndex:indexPath.row] ? indexPath : nil;
+}
+
+#pragma mark - Protocol: UIPopoverControllerDelegate
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    
+    [self.delegate popoverPickerDidDismissPopover:self];
+    
 }
 
 @end

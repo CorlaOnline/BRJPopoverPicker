@@ -56,4 +56,12 @@
  @return The content size for `popoverPicker`
  */
 - (CGSize)contentSizeForPopoverPicker:(BRJPopoverPicker *)popoverPicker;
+
+/**
+ Informs the delegate that the picker is dismissed
+ 
+ @param popoverPicker The picker dismissed
+ */
+- (void)popoverPickerDidDismissPopover:(BRJPopoverPicker *)popoverPicker;
+
 @end
